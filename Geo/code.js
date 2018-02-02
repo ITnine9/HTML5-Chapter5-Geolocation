@@ -40,6 +40,8 @@ function displayLocation(position) {
 
   $("#location").append(" with " + position.coords.accuracy + " meters accuracy.");
 
+  $("#location").append(" found in " + option.timeout + " milliseconds");
+
   var km = computeDistance(position.coords, ourCoords);
   $("#distance").html("You are " + km + " km from the WickedlySmart HQ");
 
