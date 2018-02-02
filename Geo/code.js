@@ -36,6 +36,8 @@ function displayLocation(position) {
 
   $("#location").html("You are at Latitude: " + latitude + " Longitude, " + longitude);
 
+  $("#location").append(" with " + position.coords.accuracy + " meters accuracy.");
+
   var km = computeDistance(position.coords, ourCoords);
   $("#distance").html("You are " + km + " km from the WickedlySmart HQ");
 
