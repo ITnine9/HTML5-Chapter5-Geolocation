@@ -5,6 +5,8 @@ longitude: -122.52099
 
 var map;
 
+var option = {enableHighAccuracy: true, timeout: 100, maximumAgo: 0};
+
 function showMap(coords) {
   var googleLatAndLong = new google.maps.LatLng(coords.latitude, coords.longitude);
 
@@ -23,7 +25,7 @@ function showMap(coords) {
 
 $(document).ready( function getMyLocation() {
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(displayLocation, displayError);
+    navigator.geolocation.getCurrentPosition(displayLocation, displayError, option);
   } else {
     alert("Oops, no geolocation support");
   }
@@ -56,6 +58,9 @@ function displayError(error) {
     errorMessage = errorMessage + " " + error.message;
   }
   $("#location").html(errorMessage);
+  option.timeout += 100;
+  navigator.geolocation.getCurrentPosition(displayLocation, displayError, option);
+  $("#location").append(" ... checking again with timeout= " + option.timeout);
 }
 
 function computeDistance(startCoords, destCoords) {
